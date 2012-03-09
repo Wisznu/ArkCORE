@@ -28,9 +28,11 @@
 
 #define stat64 _stat64
 #else
+#   define stat64 stat
 #   include <dirent.h>
 #   include <fnmatch.h>
 #   include <unistd.h>
+#   define O_LARGEFILE   0100000
 #   define _getcwd getcwd
 #   define _stat stat
 #endif
@@ -496,7 +498,7 @@ bool FileSystem::_isNewer(const std::string& src, const std::string& dst) {
 }
 
 int64 FileSystem::_size(const std::string& filename) {
-    struct stat64 st;
+    struct ::stat64 st;
     int result = stat64(filename.c_str(), &st);
 
     if (result == -1) {
