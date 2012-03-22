@@ -606,7 +606,7 @@ enum PlayerSlots {
     // first slot for item stored (in any way in player m_items data)
     PLAYER_SLOT_START = 0,
     // last+1 slot for item stored (in any way in player m_items data)
-    PLAYER_SLOT_END = 150,
+    PLAYER_SLOT_END = 118,
     PLAYER_SLOTS_COUNT = (PLAYER_SLOT_END - PLAYER_SLOT_START)
 };
 
@@ -667,11 +667,6 @@ enum BuyBackSlots // 12 slots
 enum KeyRingSlots // 32 slots
 {
     KEYRING_SLOT_START = 86, KEYRING_SLOT_END = 118
-};
-
-enum CurrencyTokenSlots // 32 slots
-{
-    CURRENCYTOKEN_SLOT_START = 118, CURRENCYTOKEN_SLOT_END = 150
 };
 
 enum EquipmentSetUpdateState {
