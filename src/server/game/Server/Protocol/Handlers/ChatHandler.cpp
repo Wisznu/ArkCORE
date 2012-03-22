@@ -193,14 +193,30 @@ _player->ToggleDND();
 
         // prevent talking at unknown language (cheating)
         LanguageDesc const* langDesc = GetLanguageDescByID(lang);
-    if (!langDesc)
-    {
-        SendNotification(LANG_UNKNOWN_LANGUAGE);
-        return;
-    }
-    if (langDesc->skill_id != 0 && !_player->HasSkill(langDesc->skill_id))
-    {
-// also check SPELL_AURA_COMPREHEND_LANGUAGE (client offers option to speak in that language)
+        if (!langDesc)
+        {
+            SendNotification(LANG_UNKNOWN_LANGUAGE);
+            return;
+        }
+
+        // FG: universal languages for some chat types
+        if(lang != LANG_ADDON)
+        {
+            switch(type)
+            {
+                case CHAT_MSG_PARTY:
+                case CHAT_MSG_GUILD:
+                case CHAT_MSG_RAID:
+                case CHAT_MSG_RAID_LEADER:
+                case CHAT_MSG_RAID_WARNING:
+                case CHAT_MSG_PARTY_LEADER:
+                    lang = 0;
+            }
+        }
+
+        if (lang != LANG_UNIVERSAL && langDesc->skill_id != 0 && !_player->HasSkill(langDesc->skill_id))
+        {
+            // also check SPELL_AURA_COMPREHEND_LANGUAGE (client offers option to speak in that language)
             Unit::AuraEffectList const& langAuras = _player->GetAuraEffectsByType(SPELL_AURA_COMPREHEND_LANGUAGE);
             bool foundAura = false;
             for (Unit::AuraEffectList::const_iterator i = langAuras.begin(); i != langAuras.end(); ++i)
