@@ -537,7 +537,16 @@ bool Item::LoadFromDB(uint32 guid, uint64 owner_guid, Field* fields,
 	Tokens tokens(fields[4].GetString(), ' ', MAX_ITEM_PROTO_SPELLS);
 	if (tokens.size() == MAX_ITEM_PROTO_SPELLS)
 		for (uint8 i = 0; i < MAX_ITEM_PROTO_SPELLS; ++i)
-			SetSpellCharges(i, atoi(tokens[i]));
+        {
+            int32 dbcharges = proto->Spells[i].SpellCharges;
+            int32 val = atoi(tokens[i]);
+            if (abs(val) > abs(dbcharges))
+            {
+                sLog->outError("Item::LoadFromDB: Invalid charges count (%d of %d)", val, dbcharges);
+                val = dbcharges;
+            }
+			SetSpellCharges(i, val);
+        }
 
 	SetUInt32Value(ITEM_FIELD_FLAGS, fields[5].GetUInt32());
 	// Remove bind flag for items vs NO_BIND set
