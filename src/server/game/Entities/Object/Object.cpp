@@ -102,6 +102,12 @@ WorldObject::~WorldObject() {
 		}
 		ResetMap();
 	}
+
+    if (isActiveObject() && this->GetTypeId() != TYPEID_PLAYER)
+    {
+        sLog->outError("~WorldObject ACTIVE ptr = %p, entry = %u, guid = "I64FMT", name = %s",
+            this, GetEntry(), GetGUID(), GetName());
+    }
 }
 
 Object::~Object() {
