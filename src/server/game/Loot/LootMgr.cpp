@@ -1529,6 +1529,7 @@ void LoadLootTemplates_Gameobject() {
     LootIdSet ids_set, ids_setUsed;
     uint32 count = LootTemplates_Gameobject.LoadAndCollectLootIds(ids_set);
 
+    /*
     // remove real entries and check existence loot
     for (uint32 i = 1; i < sGOStorage.MaxEntry; ++i)
     {
@@ -1548,6 +1549,7 @@ void LoadLootTemplates_Gameobject() {
 
     // output error for any still listed (not referenced from appropriate table) ids
     LootTemplates_Gameobject.ReportUnusedIds(ids_set);
+    */
 
     if (count)
     sLog->outString(">> Loaded %u gameobject loot templates in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
@@ -1565,6 +1567,7 @@ void LoadLootTemplates_Item() {
     LootIdSet ids_set;
     uint32 count = LootTemplates_Item.LoadAndCollectLootIds(ids_set);
 
+    /*
     // remove real entries and check existence loot
     for (uint32 i = 1; i < sItemStorage.MaxEntry; ++i)
         if (ItemPrototype const *proto = sItemStorage.LookupEntry<ItemPrototype>(i))
@@ -1574,6 +1577,7 @@ void LoadLootTemplates_Item() {
 
     // output error for any still listed (not referenced from appropriate table) ids
     LootTemplates_Item.ReportUnusedIds(ids_set);
+    */
 
     if (count)
         sLog->outString(">> Loaded %u prospecting loot templates in %u ms",
