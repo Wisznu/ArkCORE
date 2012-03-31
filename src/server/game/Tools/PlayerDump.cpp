@@ -330,8 +330,8 @@ bool PlayerDumpWriter::DumpTable(std::string& dump, uint32 guid,
 			case DTT_CHARACTER: {
 				if (result->GetFieldCount() <= 67) // avoid crashes on next check
 					return true;
-				if (result->Fetch()[67].GetUInt32()) // characters.deleteInfos_Account - if filled error
-					return false;
+				//if (result->Fetch()[67].GetUInt32()) // characters.deleteInfos_Account - if filled error
+				//	return false;
 				break;
 			}
 			default:
