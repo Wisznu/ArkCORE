@@ -696,12 +696,8 @@ struct ItemPrototype {
 
     ItemDamageEntry const* getItemDamageEntry() const;
     float getDPS() const;
-    float GetMinDamage() const {
-        return floor(getDPS() * float(Delay) / 1000.0f * 0.7f + 0.5f);
-    }
-    float GetMaxDamage() const {
-        return floor(getDPS() * float(Delay) / 1000.0f * 1.3f + 0.5f);
-    }
+    float GetMinDamage() const;
+    float GetMaxDamage() const;
 
     bool IsPotion() const {
         return Class == ITEM_CLASS_CONSUMABLE
@@ -737,6 +733,15 @@ struct ItemSetNameEntry {
 struct ItemSetNameLocale {
     StringVector Name;
 };
+
+
+// FG: custom
+struct ItemPrototypeEx {
+    uint32 entry;
+    uint32 mindps;
+    uint32 maxdps;
+};
+
 
 // GCC have alternative #pragma pack() syntax and old gcc version not support pack(pop), also any gcc version not support it at some platform
 #if defined(__GNUC__)

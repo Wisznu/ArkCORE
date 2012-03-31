@@ -57,6 +57,11 @@ extern SQLStorage sPageTextStore;
 extern SQLStorage sItemStorage;
 extern SQLStorage sInstanceTemplate;
 
+
+// FG: custom
+extern SQLStorage sItemStorageEx;
+
+
 class Group;
 class Guild;
 class ArenaTeam;

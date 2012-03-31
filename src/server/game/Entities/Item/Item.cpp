@@ -356,7 +356,28 @@ ItemDamageEntry const * ItemPrototype::getItemDamageEntry() const {
 	return NULL;
 }
 
+// FG: adjusted the below functions to use item_template_ex table.
+
+float ItemPrototype::GetMinDamage() const {
+    const ItemPrototypeEx *protoEx = sItemStorageEx.LookupEntry<ItemPrototypeEx>(ItemId);
+    if (protoEx && protoEx->mindps >= 0)
+        return protoEx->mindps * float(Delay) / 1000.0f;
+
+    return floor(getDPS() * float(Delay) / 1000.0f * 0.7f + 0.5f);
+}
+float ItemPrototype::GetMaxDamage() const {
+    const ItemPrototypeEx *protoEx = sItemStorageEx.LookupEntry<ItemPrototypeEx>(ItemId);
+    if (protoEx && protoEx->maxdps >= 0)
+        return protoEx->maxdps * float(Delay) / 1000.0f;
+
+    return floor(getDPS() * float(Delay) / 1000.0f * 1.3f + 0.5f);
+}
+
 float ItemPrototype::getDPS() const {
+    const ItemPrototypeEx *protoEx = sItemStorageEx.LookupEntry<ItemPrototypeEx>(ItemId);
+    if (protoEx && protoEx->mindps >= 0 && protoEx->maxdps >= 0)
+        return floor((protoEx->mindps + protoEx->maxdps) / 2.0f);
+
 	ItemDamageEntry const* id = getItemDamageEntry();
 	if (id)
 		return id->Value[Quality];

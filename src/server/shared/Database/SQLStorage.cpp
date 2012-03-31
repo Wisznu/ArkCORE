@@ -87,3 +87,11 @@ void SQLStorage::Load() {
 	SQLStorageLoader loader;
 	loader.Load(*this);
 }
+
+
+
+// FG: custom
+
+SQLStorage sItemStorageEx("iii", "iii", "entry",
+                        "item_template_ex");
+

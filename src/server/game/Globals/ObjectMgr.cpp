@@ -2832,6 +2832,13 @@ void ObjectMgr::LoadItemPrototypes() {
         sLog->outErrorDb(
                 "Item (Entry: %u) not exist in `item_template` but referenced in `CharStartOutfit.dbc`",
                 *itr);
+
+
+    // FG: custom
+    SQLItemLoader loaderEx;
+    loaderEx.Load(sItemStorageEx);
+    sLog->outString(">> [FG] Loaded %u item prototype extensions", sItemStorageEx.RecordCount);
+    sLog->outString();
 }
 
 void ObjectMgr::LoadItemSetNameLocales() {
