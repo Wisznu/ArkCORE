@@ -418,7 +418,7 @@ void WorldSession::HandleCharCreateOpcode(WorldPacket & recv_data) {
         return;
     }
 
-    QueryResult resultacct =
+    /*QueryResult resultacct =
             LoginDatabase.PQuery(
                     "SELECT IFNULL(SUM(numchars), 0) FROM realmcharacters WHERE acctid = '%d'",
                     GetAccountId());
@@ -432,7 +432,7 @@ void WorldSession::HandleCharCreateOpcode(WorldPacket & recv_data) {
             SendPacket(&data);
             return;
         }
-    }
+    }*/
 
     QueryResult petquery =
             CharacterDatabase.PQuery(
